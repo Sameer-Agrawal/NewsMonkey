@@ -12,16 +12,20 @@ export class News extends Component {
     country: PropTypes.string,
     pageSize: PropTypes.number
   }
+   
+  capitalizefunc=(element)=>{
+    return element.charAt(0).toUpperCase()+element.slice(1)
+  }
 
   articles=[]
-  constructor(){
-    super();
-    console.log("Hello I am a constructor from news component")
+  constructor(props){
+    super(props);
     this.state={
       articles: this.articles,
       loading: false,
       page: 1,
     }
+    document.title = `${this.capitalizefunc(this.props.category)}-NewsMonkey`
   }
 
   async update(){
@@ -51,7 +55,7 @@ export class News extends Component {
     return (
       <div className='container my-3'>
       <div className='text-center'>
-          <h1 className='my-3'>NewsMonkey top headlines!</h1>
+          <h1 className='my-3'>NewsMonkey, Top {this.capitalizefunc(this.props.category)} Headlines!</h1>
       </div>
           {this.state.loading && <Spinner/>}
           <div className="row">
